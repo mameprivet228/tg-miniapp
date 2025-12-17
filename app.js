@@ -48,13 +48,25 @@ function renderCards(el, cards, hideFirst = false) {
   el.innerHTML = "";
   cards.forEach((c, idx) => {
     const d = document.createElement("div");
+
     if (hideFirst && idx === 0) {
       d.className = "card back";
-      d.textContent = "🂠";
-    } else {
-      d.className = "card" + (isRed(c.s) ? " red" : "");
-      d.textContent = `${c.r}${c.s}`;
+      el.appendChild(d);
+      return;
     }
+
+    d.className = "card " + (isRed(c.s) ? "red" : "black");
+
+    const corner = document.createElement("div");
+    corner.className = "corner";
+    corner.textContent = c.r;
+
+    const suit = document.createElement("div");
+    suit.className = "suit";
+    suit.textContent = c.s;
+
+    d.appendChild(corner);
+    d.appendChild(suit);
     el.appendChild(d);
   });
 }
@@ -224,4 +236,5 @@ btnStand.addEventListener("click", stand);
 
 // первый рендер
 setButtons();
+
 draw();
