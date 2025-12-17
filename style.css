@@ -216,3 +216,50 @@ h2{ margin:0; font-size: 14px; letter-spacing:.2px; }
   .cards{ gap: 9px; }
   .btn{ flex: 1 1 48%; }
 }
+
+.friendBox{
+  margin-top: 12px;
+  display:grid;
+  gap:10px;
+}
+
+.friendHeader{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.friendTitle{
+  font-weight: 950;
+  font-size: 13px;
+}
+.friendMini{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.friendRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.friendInput{
+  flex: 1 1 46%;
+  min-width: 160px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  outline: none;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.friendInfo{
+  white-space: pre-wrap;
+}
+
+
