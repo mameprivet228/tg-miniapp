@@ -1,62 +1,44 @@
 :root{
-  /* базовая тема (если Telegram не передал цвета) */
   --bg: #0b1220;
+  --card: rgba(255,255,255,.06);
+  --card2: rgba(255,255,255,.08);
+  --stroke: rgba(255,255,255,.10);
   --text: #e8eefc;
   --muted: rgba(232,238,252,.72);
 
-  --panel: rgba(255,255,255,.07);
-  --panel2: rgba(255,255,255,.10);
-  --stroke: rgba(255,255,255,.12);
-
-  --accent: rgba(73,153,255,.45);
-  --accent2: rgba(157,96,255,.28);
-
-  --good: rgba(0,255,163,.22);
-  --bad: rgba(255,90,90,.22);
+  --accent: #4a93ff;
+  --accent2:#9d60ff;
 
   --radius: 16px;
-  --shadow: 0 14px 40px rgba(0,0,0,.35);
+  --shadow: 0 12px 34px rgba(0,0,0,.32);
 }
 
 *{ box-sizing:border-box; }
-html, body{
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden; /* критично: убирает “уплывание” вправо */
-}
+html,body{ height:100%; width:100%; overflow-x:hidden; }
+
 body{
   margin:0;
-  color: var(--text);
+  color:var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(73,153,255,.22), transparent 60%),
-    radial-gradient(900px 500px at 90% 0%, rgba(157,96,255,.16), transparent 55%),
-    radial-gradient(900px 700px at 50% 120%, rgba(0,255,163,.10), transparent 60%),
+    radial-gradient(1200px 700px at 10% -20%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+    radial-gradient(1000px 600px at 95% -10%, color-mix(in srgb, var(--accent2) 24%, transparent), transparent 58%),
+    radial-gradient(900px 700px at 50% 120%, rgba(0,255,163,.10), transparent 62%),
     var(--bg);
 }
 
-/* верх */
 .top{
   position: sticky;
   top: 0;
   z-index: 5;
   padding: 14px 16px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
   backdrop-filter: blur(10px);
-  background: rgba(11,18,32,.55);
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
-.title{
-  font-weight: 1000;
-  font-size: 18px;
-  letter-spacing:.2px;
-}
-.subtitle{
-  margin-top: 4px;
-  font-size: 12px;
-  color: var(--muted);
-}
+.title{ font-weight: 950; font-size: 18px; letter-spacing:.2px; }
+.subtitle{ margin-top:4px; font-size: 12px; color: var(--muted); }
 
-/* сетка */
 .wrap{
   max-width: 980px;
   margin: 0 auto;
@@ -67,59 +49,57 @@ body{
 }
 
 .panel{
-  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.045));
   border: 1px solid rgba(255,255,255,.10);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 14px;
+  overflow: hidden;
 }
 
 .row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap: 12px;
+  gap:10px;
 }
-h2{
-  margin:0;
-  font-size: 14px;
-  letter-spacing:.2px;
-}
+
+h2{ margin:0; font-size: 14px; letter-spacing:.2px; }
 
 .sum{
-  font-weight: 1000;
-  font-size: 13px;
-  padding: 7px 10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 42px;
+  height: 30px;
+  padding: 0 10px;
   border-radius: 999px;
+  font-weight: 950;
   background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.10);
-  color: rgba(255,255,255,.92);
-  min-width: 44px;
-  text-align:center;
+  border: 1px solid rgba(255,255,255,.08);
 }
 
-/* “стол” */
 .table{
   margin-top: 10px;
   padding: 10px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.10);
   background:
-    radial-gradient(420px 240px at 20% 10%, rgba(0,255,163,.10), transparent 60%),
-    radial-gradient(420px 240px at 90% 50%, rgba(73,153,255,.12), transparent 60%),
+    radial-gradient(420px 240px at 15% 15%, rgba(0,255,163,.10), transparent 62%),
+    radial-gradient(420px 240px at 90% 60%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 65%),
     rgba(0,0,0,.18);
-
-  overflow-x: auto;            /* если карт много — пусть скроллится блок, а не ломает страницу */
+  border: 1px solid rgba(255,255,255,.08);
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
 .cards{
   display:flex;
+  flex-wrap: nowrap;
   gap: 10px;
-  flex-wrap: nowrap;           /* важное: не переносим карты, на узком экране будет горизонтальный скролл */
-  align-items: stretch;
+  min-height: 84px;
+  align-items: center;
 }
 
-/* карточки */
 .card{
   width: 56px;
   height: 80px;
@@ -127,36 +107,39 @@ h2{
   max-width: 56px;
 
   border-radius: 12px;
-  padding: 7px 7px 9px;
   position: relative;
-
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  flex-direction: column;
+  justify-content: space-between;
 
-  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+  padding: 6px 6px 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.06));
   border: 1px solid rgba(255,255,255,.14);
-  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  box-shadow: 0 6px 14px rgba(0,0,0,.24);
+
   transform: translateZ(0);
 }
+
 .card .corner{
-  font-weight: 1000;
+  font-weight: 950;
   font-size: 14px;
-  letter-spacing:.2px;
+  letter-spacing:.3px;
 }
 .card .suit{
-  align-self:flex-end;
   font-size: 18px;
   opacity: .95;
+  align-self: flex-end;
 }
 
 .card.red{ color: #ffb4b4; }
 .card.black{ color: rgba(255,255,255,.92); }
 
 .card.back{
-  background: linear-gradient(135deg, rgba(73,153,255,.30), rgba(157,96,255,.18));
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent) 40%, transparent),
+    color-mix(in srgb, var(--accent2) 22%, transparent)
+  );
   border: 1px dashed rgba(255,255,255,.22);
-  box-shadow: 0 6px 14px rgba(0,0,0,.22);
 }
 .card.back::after{
   content:"🂠";
@@ -169,19 +152,20 @@ h2{
   opacity:.95;
 }
 
-/* лёгкая анимация “прилетела карта” */
+/* 🔥 Анимация раздачи */
 @keyframes dealIn{
-  from { transform: translateY(10px) scale(.98); opacity: .0; }
-  to   { transform: translateY(0) scale(1); opacity: 1; }
+  0%   { transform: translateY(14px) rotate(-3deg) scale(.96); opacity: 0; filter: blur(1px); }
+  100% { transform: translateY(0) rotate(0) scale(1); opacity: 1; filter: blur(0); }
 }
-.card.deal{ animation: dealIn .16s ease-out; }
+.card.deal{
+  animation: dealIn .18s ease-out;
+}
 
-/* управление */
+/* Кнопки */
 .controls{
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 6px;
 }
 
 .btn{
@@ -191,68 +175,120 @@ h2{
   color: var(--text);
   padding: 11px 14px;
   border-radius: 14px;
-  font-weight: 1000;
-  cursor: pointer;
-  transition: transform .06s ease, opacity .15s ease, background .15s ease;
+  font-weight: 950;
+  cursor:pointer;
+  transition: transform .06s ease, background .15s ease, opacity .15s ease;
+  user-select:none;
+
+  flex: 1 1 46%;
+  text-align:center;
 }
+
 .btn:active{ transform: translateY(1px); }
 .btn:disabled{ opacity:.45; cursor:not-allowed; }
 
 .btn.primary{
-  background: linear-gradient(135deg, rgba(73,153,255,.35), rgba(73,153,255,.18));
-  border-color: rgba(73,153,255,.45);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent) 36%, transparent),
+    color-mix(in srgb, var(--accent) 18%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--accent) 55%, rgba(255,255,255,.12));
 }
 
-/* на мобиле делаем кнопки “как надо” */
-.btn{
-  flex: 1 1 46%;
-  text-align:center;
-}
-#btnNew{ flex-basis: 46%; }
-#btnHit{ flex-basis: 46%; }
-#btnStand{ flex-basis: 100%; }
-
-/* обучающий блок */
+/* Учебные блоки */
 .edu{
   margin-top: 12px;
   display:grid;
   gap: 8px;
 }
+
 .edu-title{
   margin-top: 6px;
   font-size: 12px;
   color: var(--muted);
 }
-.hint, .prob, .comment, .status{
+
+.box{
   padding: 12px;
   border-radius: 14px;
   background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.10);
-}
-.hint{ font-weight: 900; }
-.prob{ font-weight: 1000; }
-.status{ font-weight: 1000; }
-
-.status.good{
-  border-color: rgba(0,255,163,.25);
-  background: linear-gradient(180deg, rgba(0,255,163,.12), rgba(0,0,0,.18));
-}
-.status.bad{
-  border-color: rgba(255,90,90,.25);
-  background: linear-gradient(180deg, rgba(255,90,90,.12), rgba(0,0,0,.18));
-}
-.status.neutral{
-  border-color: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.08);
 }
 
-/* футер */
+.hint{ font-weight: 950; }
+.prob{ font-weight: 950; }
+.comment{ color: rgba(255,255,255,.88); }
+.status{ font-weight: 950; }
+
+/* Статистика + урок */
+.statsRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(255,255,255,.08);
+  font-weight: 950;
+  font-size: 12px;
+}
+.toggle{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(255,255,255,.08);
+  cursor:pointer;
+  user-select:none;
+  font-weight: 950;
+  font-size: 12px;
+}
+.toggle .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.20);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.toggle.on .dot{
+  background: color-mix(in srgb, var(--accent) 70%, white 10%);
+  border-color: color-mix(in srgb, var(--accent) 70%, rgba(255,255,255,.2));
+}
+
+.quiz{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.quiz .btn{
+  flex: 1 1 46%;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
 .foot{
   padding: 10px 16px;
   color: var(--muted);
 }
 
-/* шире экран — две колонки */
 @media (min-width: 860px){
   .wrap{ grid-template-columns: 1fr 1fr; }
   .panel:last-child{ grid-column: 1 / -1; }
+}
+
+@media (max-width: 420px){
+  .wrap{ padding: 10px; }
+  .panel{ padding: 12px; }
+  .cards{ gap: 9px; }
+  .btn{ flex: 1 1 48%; }
 }
