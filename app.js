@@ -1,4 +1,5 @@
 // ===== Telegram WebApp init + viewport fix =====
+console.log("APP.JS LOADED OK");
 const tg = window.Telegram?.WebApp;
 
 function applyTgViewport() {
@@ -272,3 +273,4 @@ btnStand.addEventListener("click", stand);
 // init
 setButtons();
 draw();
+
