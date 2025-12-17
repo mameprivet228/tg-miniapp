@@ -2,11 +2,13 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>21 — образовательный симулятор</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Telegram Web Apps API -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>21 — симулятор</title>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- анти-кеш: меняй v=... когда обновляешь -->
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
   <header class="top">
@@ -28,25 +30,28 @@
         <h2>Игрок</h2>
         <div class="sum" id="playerSum">—</div>
       </div>
-      <div class="table"><div class="cards" id="dealerCards"></div></div>
+      <div class="table"><div class="cards" id="playerCards"></div></div>
+    </section>
 
     <section class="panel">
       <div class="controls">
-        <button id="btnNew" class="btn">Новая игра</button>
-        <button id="btnHit" class="btn primary" disabled>Взять карту</button>
+        <button id="btnNew" class="btn primary">Новая игра</button>
+        <button id="btnHit" class="btn" disabled>Взять карту</button>
         <button id="btnStand" class="btn" disabled>Остановиться</button>
       </div>
 
       <div class="edu">
         <div class="edu-title">Подсказка</div>
         <div id="hint" class="box hint">Нажми «Новая игра».</div>
+
         <div class="edu-title">Вероятность перебора при взятии следующей карты</div>
         <div id="bustProb" class="box prob">—</div>
+
         <div class="edu-title">Комментарий</div>
         <div id="comment" class="box comment">Это обучающий симулятор. Без ставок и выигрышей.</div>
-      </div>
 
-      <div id="status" class="box status"></div>
+        <div id="status" class="box status"></div>
+      </div>
     </section>
   </main>
 
@@ -54,7 +59,7 @@
     <small>Только образовательные цели. Не азартная игра.</small>
   </footer>
 
-  <script src="app.js"></script>
+  <!-- анти-кеш -->
+  <script src="app.js?v=7"></script>
 </body>
 </html>
-
